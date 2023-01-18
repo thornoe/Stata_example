@@ -1,0 +1,15 @@
+% Package for PDF features such as bookmarks and hyperlinks.
+% Important: Should be loaded at the end.
+% CTAN: http://www.ctan.org/pkg/hyperref
+\usepackage[%
+    bookmarks, % create bookmarks
+    bookmarksopen=true, % unfold bookmark tree in PDF viewer when document is opened
+    bookmarksopenlevel=1, % level of unfolding
+    bookmarksnumbered=true, % number bookmarks
+    pdfpagelabels=true, % set PDF page labels
+    plainpages=false, % forces arabic form of the page number
+    hyperfootnotes=true, % hyperlinks for footnotes
+    hyperindex=true, % make index page numbers into hyperlinks
+    linktoc=all, % add index text as part of the hyperlinks
+    % hidelinks % remove color and border from all types of links
+]{hyperref}

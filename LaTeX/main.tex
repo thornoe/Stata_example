@@ -1,0 +1,32 @@
+\documentclass[11pt]{article}
+\input{preample/packages}
+\input{preample/citations}
+\input{preample/hyperlinks}
+\input{preample/notes}
+\input{preample/ref_commands}
+\input{preample/title_page}
+\addbibresource{bibliography.bib}
+
+%---------------------------------------------------------------
+%-------- TITLE PAGE AND TABLE OF CONTENTS ---------------------
+%---------------------------------------------------------------
+\begin{document}
+\begin{titlingpage}
+    \maketitle
+    \input{sections/abstract}
+    \tableofcontents
+\end{titlingpage}
+
+%---------------------------------------------------------------
+%-------- SECTIONS ---------------------------------------------
+%---------------------------------------------------------------
+\input{sections/data}
+
+\clearpage
+
+\input{sections/results}
+
+\clearpage
+\printbibliography
+
+\end{document}

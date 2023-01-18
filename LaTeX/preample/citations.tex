@@ -1,0 +1,19 @@
+% CITATIONS
+\usepackage[
+  style=authoryear-comp, % compact variant of authoryear style
+  natbib=true, % natbib commands gking.harvard.edu/files/natnotes2.pdf
+  sorting=nyt, % sort bibliography by name, year, title
+  maxbibnames=7, % threshold for truncating in bibliography
+  maxcitenames=2, % threshold for truncating in citations
+  date=year, % format of printed date in bibliography
+  isbn=false % whether isbn/issn/isrn are printed
+]{biblatex}
+
+\newbibmacro*{note+pages}{ % suppress pages in bibliography
+  \printfield{note}
+  \newunit}
+
+\usepackage{csquotes} % E.g.:
+  % \begin{quote}
+  %     \enquote{\textit{You know nothing, Jon Snow}} - Ygritte
+  % \end{quote}

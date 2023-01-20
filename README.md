@@ -21,7 +21,7 @@ Example on how to analyze panel data.
 Your group can quickly get started writing together in LaTeX. It's a steep learning curve, but LaTeX is amazing for equations and all kinds of dynamic references compared to Word (however, AU [provides access](https://studerende.au.dk/it-support/software) to student group work in Microsoft Office 365 if you prefer that).
 
 To handle LaTeX code, I highly recommend using Overleaf in your browser:
-1. Download my [LaTeX article template]() as a [.zip file](https://github.com/ThorNoe/article_template/archive/refs/heads/main.zip).
+1. Download my [LaTeX article template](https://github.com/ThorNoe/article_template) as a [.zip file](https://github.com/ThorNoe/article_template/archive/refs/heads/main.zip).
 2. Create an [Overleaf](https://www.overleaf.com/register) account
    * Select "New Project" &rarr; "Upload Project" &rarr; add the .zip file.
    * "Share" &rarr; add e-mail addresses of your other group members.

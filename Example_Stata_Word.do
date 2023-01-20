@@ -1,10 +1,10 @@
 ********************************************************************************
 * STATA CODE EXAMPLE (OPTIONAL SUPPLEMENT FOR COURSE 2525: APPLIED ECONOMICS)
-* LOAD DATA: Examples on how to load data from .csv or .xlsx files
-* FIGURES: Examples on how to set up, save, and combine figures
-* TABLES: Examples on how to save tables of descriptive statistics and estimates
-* PANEL ANALYSIS: Examples on how to analyze panel data (BEYOND EXPECTED SKILLS)
-* MIT LICENSE: Copyright (c) 2023 Thor Donsby Noe
+* LOAD DATA: Example on how to load data from .csv or .xlsx files
+* FIGURES: Example on how to set up, save, and combine figures
+* TABLES: Example on how to export tables of descriptive statistics or estimates
+* PANEL ANALYSIS: Example on how to analyze panel data (BEYOND EXPECTED SKILLS)
+* MIT LICENSE: Copyright (c) 2023 Thor Donsby Noe (give credit; no liability)
 ********************************************************************************
 /* Installations
 ssc install bcuse 	// access Wooldridge datasets for the examples below
@@ -36,6 +36,9 @@ sum
 
 * Loading data on firm scrap rates
 bcuse jtrain, clear
+
+* Declare data as a panel of firms (identified by firm codes) for xt commands
+xtset fcode year // "strongly balanced", i.e. no firm is missing in any year
 
 * Generate lead variable for figures below
 gen grant_lead = grant[_n+1]				// dummy for job training next year
@@ -158,8 +161,8 @@ outreg2 using "$tables/results.doc", /// append to existing Word table
 * Standard pooled OLS with dummies to capture firm-specific effects
 reg lscrap grant grant_1 d88 d89 i.fcode // identical to FE estimation but for constant and dummies
 outreg2 using "$tables/results.doc", ///
-	ctitle("Dummies, (se)") label nocons ///
-	drop(i.fcode) addtext(Firm dummies, Yes) // omit dummies
+	drop(i.fcode) addtext(Firm dummies, Yes) /// omit firm dummies
+	ctitle("Dummies, (se)") label nocons
 
 * FE estimation: time-demeaning eliminates firm-specific effect (within-transformation)
 xtreg lscrap grant grant_1 d88 d89, fe // identical to table 14.1 in Wooldridge 7e
@@ -167,6 +170,6 @@ outreg2 using "$tables/results.doc", ///
 	ctitle("FE, (se)") label nocons
 
 * FE estimation with cluster-robust std. errors (obs for same firm aren't i.i.d.)
-xtreg lscrap grant grant_1 d88 d89, fe vce(cluster fcode) // lag insignificant
-outreg2 using "$tables/results.doc",
+xtreg lscrap grant grant_1 d88 d89, fe cluster(fcode) // lag is insignificant
+outreg2 using "$tables/results.doc", /// see chapter 14.5 in Wooldridge 7e, pp. 480-483
 	ctitle("FE cluster robust, (se)") label nocons

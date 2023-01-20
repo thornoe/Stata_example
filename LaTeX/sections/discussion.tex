@@ -1,0 +1,10 @@
+\section{Discussion}
+\label{s:discussion}
+
+\subsection{Robustness}
+\label{s:discussion_robustness}
+The $\hat{\beta}_2$ estimate of the Fixed Effects estimation model \eqref{eq:FE} in \tref{t:results} above \citep[identical to table 14.1 in][p. 464]{wooldridge2015introductory} indicates a large effect of \emph{grant lagged}. However, the estimated effect becomes insignificant in model (5) under heteroscedasticity- and cluster-robust inference (which by definition increases the size of the standard errors). That is, I cannot be 95\% certain that receiving a grant had a statistically significant effect on scrap rates in the same year or a lagged effect the next year. On the contrary, a p-value of 0.084 for $\hat{\beta}_1$ is decent considering the weak statistical power due to the low number of firms for which \emph{scrap} is recorded. Moreover, the large size of $\hat{\beta}_2$ and its p-value of 0.141 implies that I cannot rule out lagged effects either.
+
+\subsection{Random treatment}
+\label{s:discussion_random}
+The validity of either model relies on the assumption of random treatment assignment, that is, the firms should be drawn from the same distribution (prior to treatment) regardless of whether they will later receive the grant (i.e. be treated) or not. In \aref{s:appendix_scrap}, I investigate this assumption by plotting the distribution of scrap rates in 1987 for the treated and untreated firms respectively. Despite the median scrap rate in 1987 was the same among the treated and untreated firms, Panel A of \fref{f:kernels} suggests a selection bias as none of the firms that received the grant in 1988 had a scrap rate close to zero (smallest was 0.28\%) or above 18\% in 1987. On the other hand, firms that did not receive the grant in 1988 nor in 1989 had much higher variance in scrap rates in 1987 due to several extreme observations (i.e. of the 25 untreated firms, five had a scrap rate below 0.28\% and three above 18\%).

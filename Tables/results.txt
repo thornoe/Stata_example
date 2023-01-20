@@ -1,0 +1,21 @@
+		(1)	(2)	(3)	(4)	(5)
+		Baseline	Trend	Dummies	FE	FE cluster robust
+VARIABLES	LABELS	(se)	(se)	(se)	(se)	(se)
+						
+grant	Grant	0.200	0.203	-0.252*	-0.252*	-0.252*
+		(0.338)	(0.325)	(0.151)	(0.151)	(0.143)
+grant_1	Grant lagged	0.0489	0.0459	-0.422**	-0.422**	-0.422
+		(0.436)	(0.425)	(0.210)	(0.210)	(0.282)
+d88	Year 1988	-0.239		-0.0802	-0.0802	-0.0802
+		(0.311)		(0.109)	(0.109)	(0.0978)
+d89	Year 1989	-0.497		-0.247*	-0.247*	-0.247
+		(0.338)		(0.133)	(0.133)	(0.197)
+trend	Time trend		-0.248			
+			(0.168)			
+						
+Observations		162	162	162	162	162
+R-squared		0.017	0.017	0.928	0.201	0.201
+Number of fcode					54	54
+Firm dummies				Yes		
+Standard errors in parentheses						
+*** p<0.01, ** p<0.05, * p<0.1						

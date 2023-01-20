@@ -1,0 +1,30 @@
+{\rtf1\fs24
+\trowd\trgaph75\trleft-75\intbl\trqc\clbrdrt\brdrs\cellx2304\clbrdrt\brdrs\cellx3600\clbrdrt\brdrs\cellx4752\clbrdrt\brdrs\cellx6048\clbrdrt\brdrs\cellx7344\clbrdrt\brdrs\cellx9936
+\ql \cell\qc (1)\cell\qc (2)\cell\qc (3)\cell\qc (4)\cell\qc (5)\cell\row
+\trowd\trgaph75\trleft-75\trqc\cellx2304\cellx3600\cellx4752\cellx6048\cellx7344\cellx9936
+\ql \cell\qc Baseline\cell\qc Trend\cell\qc Dummies\cell\qc FE\cell\qc FE cluster robust\cell\row
+\trowd\trgaph75\trleft-75\trqc\cellx2304\cellx3600\cellx4752\cellx6048\cellx7344\cellx9936
+\trowd\trgaph75\trleft-75\trqc\clbrdrb\brdrs\cellx2304\clbrdrb\brdrs\cellx3600\clbrdrb\brdrs\cellx4752\clbrdrb\brdrs\cellx6048\clbrdrb\brdrs\cellx7344\clbrdrb\brdrs\cellx9936
+\ql VARIABLES\cell\qc (se)\cell\qc (se)\cell\qc (se)\cell\qc (se)\cell\qc (se)\cell\row
+\trowd\trgaph75\trleft-75\trqc\cellx2304\cellx3600\cellx4752\cellx6048\cellx7344\cellx9936
+\ql \cell\qc \cell\qc \cell\qc \cell\qc \cell\qc \cell\row
+\ql Grant\cell\qc 0.200\cell\qc 0.203\cell\qc -0.252*\cell\qc -0.252*\cell\qc -0.252*\cell\row
+\ql \cell\qc (0.338)\cell\qc (0.325)\cell\qc (0.151)\cell\qc (0.151)\cell\qc (0.143)\cell\row
+\ql Grant lagged\cell\qc 0.0489\cell\qc 0.0459\cell\qc -0.422**\cell\qc -0.422**\cell\qc -0.422\cell\row
+\ql \cell\qc (0.436)\cell\qc (0.425)\cell\qc (0.210)\cell\qc (0.210)\cell\qc (0.282)\cell\row
+\ql Year 1988\cell\qc -0.239\cell\qc \cell\qc -0.0802\cell\qc -0.0802\cell\qc -0.0802\cell\row
+\ql \cell\qc (0.311)\cell\qc \cell\qc (0.109)\cell\qc (0.109)\cell\qc (0.0978)\cell\row
+\ql Year 1989\cell\qc -0.497\cell\qc \cell\qc -0.247*\cell\qc -0.247*\cell\qc -0.247\cell\row
+\ql \cell\qc (0.338)\cell\qc \cell\qc (0.133)\cell\qc (0.133)\cell\qc (0.197)\cell\row
+\ql Time trend\cell\qc \cell\qc -0.248\cell\qc \cell\qc \cell\qc \cell\row
+\ql \cell\qc \cell\qc (0.168)\cell\qc \cell\qc \cell\qc \cell\row
+\ql \cell\qc \cell\qc \cell\qc \cell\qc \cell\qc \cell\row
+\ql Observations\cell\qc 162\cell\qc 162\cell\qc 162\cell\qc 162\cell\qc 162\cell\row
+\ql R-squared\cell\qc 0.017\cell\qc 0.017\cell\qc 0.928\cell\qc 0.201\cell\qc 0.201\cell\row
+\ql Number of fcode\cell\qc \cell\qc \cell\qc \cell\qc 54\cell\qc 54\cell\row
+\trowd\trgaph75\trleft-75\trqc\trbrdrb\brdrs\clbrdrb\brdrs\cellx2304\clbrdrb\brdrs\cellx3600\clbrdrb\brdrs\cellx4752\clbrdrb\brdrs\cellx6048\clbrdrb\brdrs\cellx7344\clbrdrb\brdrs\cellx9936
+\ql Firm dummies\cell\qc \cell\qc \cell\qc Yes\cell\qc \cell\qc \cell\row
+\pard\qc
+Standard errors in parentheses\par
+*** p<0.01, ** p<0.05, * p<0.1\par
+}

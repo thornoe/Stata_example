@@ -1,16 +1,16 @@
 ********************************************************************************
 * STATA CODE EXAMPLE (OPTIONAL SUPPLEMENT FOR COURSE 2525: APPLIED ECONOMICS)
-* LOAD DATA: Examples on how to load data from .csv or .xlsx files
-* FIGURES: Examples on how to set up, save, and combine figures
-* TABLES: Examples on how to save tables of descriptive statistics and estimates
-* PANEL ANALYSIS: Examples on how to analyze panel data (BEYOND EXPECTED SKILLS)
-* MIT LICENSE: Copyright (c) 2023 Thor Donsby Noe
+* LOAD DATA: Example on how to load data from .csv or .xlsx files
+* FIGURES: Example on how to set up, save, and combine figures
+* TABLES: Example on how to export tables of descriptive statistics or estimates
+* PANEL ANALYSIS: Example on how to analyze panel data (BEYOND EXPECTED SKILLS)
+* LATEX DOCUMENT: Download & compile code from GitHub.com/ThorNoe/Stata_example
+* MIT LICENSE: Copyright (c) 2023 Thor Donsby Noe (give credit; no liability)
 ********************************************************************************
 /* Installations
 ssc install bcuse 	// access Wooldridge datasets for the examples below
 ssc install estout	// export tables to Excel, Word, and LaTeX
 */
-
 
 * Change directory to the folder with your data files (redundant for bcuse)
 cd 				"C:\Users\au687527\GitHub\Stata_example"
@@ -37,6 +37,9 @@ sum
 * Loading data on firm scrap rates
 bcuse jtrain, clear
 
+* Declare data as a panel of firms (identified by firm codes) for xt commands
+xtset fcode year // "strongly balanced", i.e. no firm is missing in any year
+
 * Generate lead variable for figures below
 gen grant_lead = grant[_n+1]				// dummy for job training next year
 gen grant_lead2 = grant_lead[_n+1]			// dummy for job training in 2 years
@@ -57,9 +60,6 @@ label variable trend 	"Time trend"		// covering year t in {0,1,2}
 ********************************************************************************
 * DESCRIPTIVE ANALYSIS (of panel data)
 ********************************************************************************
-* Declare data as a panel of firms (each identified by their firm code)
-xtset fcode year // "strongly balanced", i.e. no firm is missing in any year
-
 * Take a first look at the data
 xtdescribe // balanced panel of 157 firms observed each year 1987-89
 sort year fcode	// sort data by year and firm (required for "by year" command)
@@ -112,25 +112,28 @@ esttab using "$tables/descriptive_yearly.tex", replace style(tex) delimiter("&")
 gr two	(kdensity scrap if d88==0 & d89==0 & grant_lead==1) ///
 		(kdensity scrap if d88==0 & d89==0 & grant_lead==0 & grant_lead2==0) ///
 		, legend(label(1 "Grant in 1988") label(2 "No grant")) ///
-		title("Scrap rates in 1987") xtitle("Scrap rate (per 100 items)") ///
+		title("Panel A: Scrap rates in 1987") xtitle("Scrap rate (per 100 items)") ///
 		ytitle("Density") name(Fig_87, replace) // name for graph combine below
 graph export "$figures/kernels_87.png", replace
-* Indicates (self) selection bias: firms getting grant in 88 scrapped more in 87
+sum scrap if d88==0 & d89==0 & grant_lead==1, detail // smallest=.28, p10=.45
+sum scrap if d88==0 & d89==0 & grant_lead==0 & grant_lead2==0, detail // p10=.06
+tab scrap if d88==0 & d89==0 & grant_lead==0 & grant_lead2==0
+* Selection bias? No firm getting grant in 1988 scrapped less than 0.28% in 1987
 
 * Figure: Kernel density in 1988 (by grant in 1988)
 gr two	(kdensity scrap if d88==1 & grant==1) ///
 		(kdensity scrap if d88==1 & grant==0 & grant_lead==0) ///
 		, legend(label(1 "Grant in 1988") label(2 "No grant")) ///
-		title("Scrap rates in 1988") xtitle("Scrap rate (per 100 items)") ///
+		title("Panel B: Scrap rates in 1988") xtitle("Scrap rate (per 100 items)") ///
 		ytitle("Density") name(Fig_88, replace) // name for graph combine below
 graph export "$figures/kernels_88.png", replace
-* A scrap rate < 7% is now more common among the firms that receive grant in 88
+* A scrap rate < 7% is now more common among the firms that receive grant in 1988
 
 * Figure: Kernel density in 1989 (by grant in 1988)
 gr two	(kdensity scrap if d89==1 & grant_1==1) ///
 		(kdensity scrap if d89==1 & grant_1==0 & grant==0) ///
 		, legend(label(1 "Grant in 1988") label(2 "No grant")) ///
-		title("Scrap rates in 1989") xtitle("Scrap rate (per 100 items)") ///
+		title("Panel C: Scrap rates in 1989") xtitle("Scrap rate (per 100 items)") ///
 		ytitle("Density") name(Fig_89, replace) // name for graph combine below
 graph export "$figures/kernels_89.png", replace
 * Now a much larger share have a very low scrap rate regardless of grant history
@@ -163,21 +166,21 @@ xtreg lscrap grant grant_1 d88 d89, fe // identical to table 14.1 in Wooldridge 
 est store FE, title("FE")
 
 * FE estimation with cluster-robust std. errors (obs for same firm aren't i.i.d.)
-xtreg lscrap grant grant_1 d88 d89, fe vce(cluster fcode) // lag insignificant
-est store FE_cluster, title("FE cluster robust")
+xtreg lscrap grant grant_1 d88 d89, fe cluster(fcode) // lag is insignificant
+est store FE_cluster, title("FE cluster robust") // see chapter 14.5 in Wooldridge 7e, pp. 480-483
 
 * Save complete estimation results as Excel file
 estout * using "$tables/results.xls", replace /// create/overwrite Excel workbook
 	starlevels(* .10 ** .05 *** .01) mlabels(,titles numbers) label /// use model titles & variable labels
 	cells( b(star fmt(4)) se(par fmt(4)) ) ///
-	stats( r2 N, fmt(4 %12.0gc) labels("R-squared" "Observations") )
+	stats( r2 N N_g g_avg, fmt(4 %12.0gc) labels("R-squared" "Obs." "Number of firms" "Obs. per firm") )
 
 * Save reduced estimation results as LaTeX file (without dummies)
 estout * using "$tables/results.tex", replace style(tex) /// create/overwrite LaTeX file
 	starlevels(* .10 ** .05 *** .01) mlabels(,titles numbers) label ///
 	cells( b(star fmt(4)) se(par fmt(4)) ) ///
-	stats( r2 N, fmt(4 %12.0gc) labels("R$^2$" "Observations") ) ///
-	drop(_cons) indicate("Firm dummies=*fcode*") /// omit constant and dummies
+	stats( r2 N N_g g_avg, fmt(4 %12.0gc) labels("R$^2$" "Obs." "Number of firms" "Obs. per firm") ) ///
+	drop(_cons) indicate("Firm dummies=*fcode*") /// omit constant and firm dummies
 	prehead("\begin{tabular}{lccccc}\hline") /// MANUALLY FIT NUMBER OF C's TO NUMBER OF MODELS!
 	posthead("\hline") prefoot("\hline") ///
 	postfoot("\hline\end{tabular}\\Standard errors in parentheses. *** p<0.01, ** p<0.05, * p<0.1")

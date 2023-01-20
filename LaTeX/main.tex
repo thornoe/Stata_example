@@ -13,20 +13,35 @@
 \begin{document}
 \begin{titlingpage}
     \maketitle
-    \input{sections/abstract}
+    % \begin{abstract}
+    % \end{abstract}
     \tableofcontents
 \end{titlingpage}
 
 %---------------------------------------------------------------
 %-------- SECTIONS ---------------------------------------------
 %---------------------------------------------------------------
+\input{sections/intro}
+% \clearpage
 \input{sections/data}
-
-\clearpage
-
+% \clearpage
+\input{sections/model}
+% \clearpage
 \input{sections/results}
-
-\clearpage
+% \clearpage
+\input{sections/discussion}
+% \clearpage
+\input{sections/conclusion}
+% \clearpage
 \printbibliography
+
+%---------------------------------------------------------------
+%-------- APPENDIX ---------------------------------------------
+%---------------------------------------------------------------
+\clearpage
+\appendix
+\setcounter{page}{1}\pagenumbering{roman} % page numbering i, ii, iii, iv...
+% \renewcommand{\theequation}{\thesection.\arabic{equation}} % add appendix letter to equation numbering
+\input{sections/appendix}
 
 \end{document}

@@ -1,0 +1,25 @@
+\section{Empirical model}
+\label{s:model}
+As a baseline, I first consider a simple model of the scrap rate of firm $i$ in year $t$
+\begin{align}\label{eq:baseline}
+    \ln\left(scrap_{i,t}\right)
+    = \beta_1grant_{i,t} + \beta_2grant_{i,t-1} + \bm{\delta d_t} + \epsilon_{i,t}
+\end{align}
+where $\bm{d_t}$ is a vector of dummies for each year $t$ (excluding the first to avoid perfect collinearity) to capture time effects. In the special case of an approximately linear yearly growth rate (or in this case, a steady decline), the model could be simplified with a single \emph{trend} variable as
+\begin{align}\label{eq:trend}
+    \ln\left(scrap_{i,t}\right)
+    = \beta_1grant_{i,t} + \beta_2grant_{i,t-1} + \delta trend_t + \epsilon_{i,t}
+\end{align}
+The error term, $\epsilon_{i,t}=a_i+u_{i,t}$, can be reduced to $u_{i,t}$ by explicitly including the time-constant effects as dummies for each firm, $a_i$, (i.e. firm-specific intercepts)
+\begin{align}\label{eq:dummies}
+    \ln\left(scrap_{i,t}\right)
+    = \beta_1grant_{i,t} + \beta_2grant_{i,t-1} + \bm{\delta d_t} + a_i + u_{i,t}
+\end{align}
+Time-demeaning each variable eliminates the time-constant effect, $a_i$, and provides the Fixed Effects estimation model \eqref{eq:FE} that is applied by \citet[example 14.1, pp. 464-465]{wooldridge2015introductory}:
+\begin{align}\label{eq:FE}
+    \ln\left(\ddot{scrap}_{i,t}\right)
+    = \beta_1\ddot{grant}_{i,t} + \beta_2\ddot{grant}_{i,t-1} + \bm{\delta \ddot{d}_t} + \ddot{u}_{i,t}
+\end{align}
+Model \eqref{eq:FE} is estimated under the assumption of independent and identically distributed (i.i.d.) errors, $u_{i,t}$. That is, for all years $t\neq s$, the idiosyncratic errors in two different years are uncorrelated, $\text{Cov}(u_{i,t},u_{i,s}|\bm{X}_i,a_i)=0$ (Assumption FE.6), and have the same variance, $\text{Var}(u_{i,t}|\bm{X}_i,a_i)=\text{Var}(u_{i,s}|\bm{X}_i,a_i)=\sigma^2_u$ (Assumption FE.5), conditional on the explanatory variables $\bm{X}_i$ and the firm-specific intercepts $a_i$.
+
+In model (5), I relax Assumption FE.5 and FE.6 in allowing for heteroscedasticity over time as well as serial correlation between observations for the same firm by applying heteroscedasticity- and cluster-robust standard errors \citep*[see][appendix 14A.2, pp. 493-494]{wooldridge2015introductory}.

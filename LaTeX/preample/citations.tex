@@ -9,11 +9,12 @@
   isbn=false % whether isbn/issn/isrn are printed
 ]{biblatex}
 
-\newbibmacro*{note+pages}{ % suppress pages in bibliography
+\renewbibmacro*{note+pages}{ % suppress pages in bibliography
   \printfield{note}
   \newunit}
 
 \usepackage{csquotes} % E.g.:
   % \begin{quote}
-  %     \enquote{\textit{You know nothing, Jon Snow}} - Ygritte
+  %     \enquote{\textit{You know nothing, Jon Snow}}\\
+  %     \null\hfill - Ygritte
   % \end{quote}

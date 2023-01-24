@@ -145,7 +145,7 @@ graph export "$figures/kernels_combined.png", replace
 
 
 ********************************************************************************
-* ESTIMATION (panel analysis reproduces Table 14.1 in Wooldridge 7e, p. 464)
+* ESTIMATION (panel analysis elaborates on Table 14.1 in Wooldridge 7e, p. 464)
 ********************************************************************************
 estimates clear // clear estimates before creating table of estimation results
 
@@ -162,12 +162,12 @@ reg lscrap grant grant_1 d88 d89 i.fcode // identical to FE estimation but for c
 est store dummies, title("Dummies")
 
 * FE estimation: time-demeaning eliminates firm-specific effect (within-transformation)
-xtreg lscrap grant grant_1 d88 d89, fe // identical to table 14.1 in Wooldridge 7e
+xtreg lscrap grant grant_1 d88 d89, fe // identical to table 14.1 in Wooldridge 7e, p. 464
 est store FE, title("FE")
 
 * FE estimation with cluster-robust std. errors (obs for same firm aren't i.i.d.)
 xtreg lscrap grant grant_1 d88 d89, fe cluster(fcode) // lag is insignificant
-est store FE_cluster, title("FE cluster robust") // see chapter 14.5 in Wooldridge 7e, pp. 480-483
+est store FE_cluster, title("FE cluster robust") // see appendix 14A.2 in Wooldridge 7e, pp. 493-494
 
 * Save complete estimation results as Excel file
 estout * using "$tables/results.xls", replace /// create/overwrite Excel workbook

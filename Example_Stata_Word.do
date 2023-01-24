@@ -60,9 +60,6 @@ label variable trend 	"Time trend"		// covering year t in {0,1,2}
 ********************************************************************************
 * DESCRIPTIVE ANALYSIS (of panel data)
 ********************************************************************************
-* Declare data as a panel of firms (each identified by their firm code)
-xtset fcode year // "strongly balanced", i.e. no firm is missing in any year
-
 * Take a first look at the data
 xtdescribe // balanced panel of 157 firms observed each year 1987-89
 sort year fcode	// sort data by year and firm (required for "by year" command)
@@ -115,25 +112,28 @@ esttab using "$tables/descriptive_yearly.rtf", replace ///
 gr two	(kdensity scrap if d88==0 & d89==0 & grant_lead==1) ///
 		(kdensity scrap if d88==0 & d89==0 & grant_lead==0 & grant_lead2==0) ///
 		, legend(label(1 "Grant in 1988") label(2 "No grant")) ///
-		title("Scrap rates in 1987") xtitle("Scrap rate (per 100 items)") ///
+		title("Panel A: Scrap rates in 1987") xtitle("Scrap rate (per 100 items)") ///
 		ytitle("Density") name(Fig_87, replace) // name for graph combine below
 graph export "$figures/kernels_87.png", replace
-* Indicates (self) selection bias: firms getting grant in 88 scrapped more in 87
+sum scrap if d88==0 & d89==0 & grant_lead==1, detail // smallest=.28, p10=.45
+sum scrap if d88==0 & d89==0 & grant_lead==0 & grant_lead2==0, detail // p10=.06
+tab scrap if d88==0 & d89==0 & grant_lead==0 & grant_lead2==0
+* Selection bias? No firm getting grant in 1988 scrapped less than 0.28% in 1987
 
 * Figure: Kernel density in 1988 (by grant in 1988)
 gr two	(kdensity scrap if d88==1 & grant==1) ///
 		(kdensity scrap if d88==1 & grant==0 & grant_lead==0) ///
 		, legend(label(1 "Grant in 1988") label(2 "No grant")) ///
-		title("Scrap rates in 1988") xtitle("Scrap rate (per 100 items)") ///
+		title("Panel B: Scrap rates in 1988") xtitle("Scrap rate (per 100 items)") ///
 		ytitle("Density") name(Fig_88, replace) // name for graph combine below
 graph export "$figures/kernels_88.png", replace
-* A scrap rate < 7% is now more common among the firms that receive grant in 88
+* A scrap rate < 7% is now more common among the firms that receive grant in 1988
 
 * Figure: Kernel density in 1989 (by grant in 1988)
 gr two	(kdensity scrap if d89==1 & grant_1==1) ///
 		(kdensity scrap if d89==1 & grant_1==0 & grant==0) ///
 		, legend(label(1 "Grant in 1988") label(2 "No grant")) ///
-		title("Scrap rates in 1989") xtitle("Scrap rate (per 100 items)") ///
+		title("Panel C: Scrap rates in 1989") xtitle("Scrap rate (per 100 items)") ///
 		ytitle("Density") name(Fig_89, replace) // name for graph combine below
 graph export "$figures/kernels_89.png", replace
 * Now a much larger share have a very low scrap rate regardless of grant history
@@ -145,8 +145,8 @@ graph export "$figures/kernels_combined.png", replace
 
 
 ********************************************************************************
-* ESTIMATION (panel analysis reproduces Table 14.1 in Wooldridge 7e, p. 464)
-* Replace ".doc" with ".xls" to produce Excel workbook of results instead
+* ESTIMATION (panel analysis elaborates on Table 14.1 in Wooldridge 7e, p. 464)
+* Replace ".doc" with ".xls" to produce an Excel workbook with results instead
 ********************************************************************************
 * Standard pooled OLS as a baseline
 reg lscrap grant grant_1 d88 d89 // grant is insignificant
@@ -165,11 +165,11 @@ outreg2 using "$tables/results.doc", ///
 	ctitle("Dummies, (se)") label nocons
 
 * FE estimation: time-demeaning eliminates firm-specific effect (within-transformation)
-xtreg lscrap grant grant_1 d88 d89, fe // identical to table 14.1 in Wooldridge 7e
-outreg2 using "$tables/results.doc", ///
+xtreg lscrap grant grant_1 d88 d89, fe // identical to table 14.1 in Wooldridge 7e, p. 464
+outreg2 using "$tables/results.doc", 
 	ctitle("FE, (se)") label nocons
 
 * FE estimation with cluster-robust std. errors (obs for same firm aren't i.i.d.)
 xtreg lscrap grant grant_1 d88 d89, fe cluster(fcode) // lag is insignificant
-outreg2 using "$tables/results.doc", /// see chapter 14.5 in Wooldridge 7e, pp. 480-483
+outreg2 using "$tables/results.doc", /// see appendix 14A.2 in Wooldridge 7e, pp. 493-494
 	ctitle("FE cluster robust, (se)") label nocons

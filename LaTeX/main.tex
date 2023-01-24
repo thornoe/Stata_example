@@ -5,7 +5,7 @@
 \input{preample/notes}
 \input{preample/ref_commands}
 \input{preample/title_page} % edit title & author(s) in title_page.tex
-\addbibresource{bibliography.bib}
+\addbibresource{bibliography.bib} % add references to bibliography.bib
 
 %---------------------------------------------------------------
 %-------- TITLE PAGE AND TABLE OF CONTENTS ---------------------
@@ -17,7 +17,7 @@
     \includegraphics[width=.5 \textwidth]{figures/Logo}
     % \begin{abstract}
     % \end{abstract}
-    \vfill % add vertical fill between elements
+    \vfill % add vertical fill (push contents down to bottom of page)
     \tableofcontents
 \end{titlingpage}
 
@@ -25,7 +25,7 @@
 %-------- SECTIONS ---------------------------------------------
 %---------------------------------------------------------------
 \input{sections/intro}
-% \clearpage
+% \clearpage % out-comment to begin next session on a new page
 \input{sections/data}
 % \clearpage
 \input{sections/model}
@@ -36,7 +36,7 @@
 % \clearpage
 \input{sections/conclusion}
 % \clearpage
-\printbibliography
+\printbibliography % prints cited references from bibliography.bib
 
 %---------------------------------------------------------------
 %-------- APPENDIX ---------------------------------------------

@@ -2,7 +2,7 @@
 \usepackage{titling} % control \maketitle and \thanks commands
 
 % PACKAGE FOR (MULTIPLE) AFFILIATIONS
-\usepackage{authblk} % edit \maketitle. E.g. add affiliations to each author:
+% \usepackage{authblk} % edit \maketitle. E.g. add affiliations to each author:
   % \author[a]{J. Snow} \author[b]{S. Tarly} \author[b]{F. Hvam}
   % \affil[a]{The Wall} \affil[b]{The Citadel}
 
@@ -14,9 +14,12 @@
 %---------------------------------------------------------------
 \title{Stata example}
 
-\author{Thor Donsby Noe
+\author{
+  Thor Donsby Noe
   \thanks{\textit{E-mail:} \href{mailto:Thor.Noe@econ.au.dk}{Thor.Noe@econ.au.dk}}
+  % \and second author
 }
-% \affil{\small Aarhus University, Department of Economics and Business Economics}
+
+% \affil{\small Aarhus University, Department of Economics and Business Economics} % requires \usepackage{authblk} above
 
 \date{\today} % Use current date

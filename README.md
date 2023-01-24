@@ -17,14 +17,18 @@ Namely, I provide the same example in two separate do-files depending on your pr
 ## Panel analysis
 Example on how to analyze panel data.
 
-## Write group projects in real-time
-Your group can quickly get started writing collaboratively with LaTeX. It's a steep learning curve, but LaTeX is amazing for equations and all kinds of dynamic references compared to Word.
-* That said, Word is far superior to Google Docs. Therefore, Aarhus University [provides access](https://studerende.au.dk/it-support/software) to collaborative group work in Microsoft Office 365 using [OneDrive](https://onedrive.live.com/) and [Office Online](https://www.office.com/) where you can write in your browser or even do real-time editing in a desktop version of Microsoft Word (select "Redigering" &rarr; "Åbn i skrivebordsprogram").
+# Collaborate on group projects
+Your group can quickly get started writing collaboratively with LaTeX. It's a steep learning curve, but LaTeX is amazing for equations and all kinds of dynamic references compared to Word. That said, Word is far superior to Google Docs.
 
-To handle LaTeX code, I highly recommend using Overleaf in your browser:
+## Use Word in in real-time
+* Aarhus University [provides access](https://studerende.au.dk/it-support/software) to collaborative group work in Microsoft Office 365 using [OneDrive](https://onedrive.live.com/) and [Office Online](https://www.office.com/).
+* You can write in your browser or even do real-time editing in your desktop version of Microsoft Word (select "Redigering" &rarr; "Åbn i skrivebordsprogram").
+
+## Write LaTeX in real-time
+To handle LaTeX code, I highly recommend using the free [Overleaf](https://www.overleaf.com) editor in your browser:
 1. Download the [.zip file](https://github.com/ThorNoe/article_template/archive/refs/heads/main.zip) of my [LaTeX article template](https://github.com/ThorNoe/article_template) (or the [.zip file](https://github.com/ThorNoe/Stata_example/raw/main/LaTeX.zip) with LaTeX code for the [pdf with outputs](https://github.com/ThorNoe/Stata_example/blob/main/LaTeX/main.pdf) of the above Stata example).
 2. Create an [Overleaf](https://www.overleaf.com/register) account
-   * Select <span style="background-color:138a07;color:white"> New Project </span> &rarr; "Upload Project" &rarr; add the .zip file.
+   * Select <span style="background-color:#138a07;color:white">New Project</span> &rarr; "Upload Project" &rarr; add the .zip file.
    * "Share" &rarr; add e-mail addresses of your other group members.
 3. Learn the basics
    * Read the guide [Learn LaTeX in 30 minutes
@@ -33,7 +37,7 @@ To handle LaTeX code, I highly recommend using Overleaf in your browser:
      * E.g. to include the data section, uncomment `\input{sections/data}` (i.e. select the line of code and press **CTRL+'** or simply delete `%` in front of the line).
      * Click on ">" next to the "sections" folder &rarr; open the "data.tex" file and start writing.
      * **CTRL+s** saves your current file and *recompiles* the entire document. Do it often to catch compiling errors early.
-     * 📄🟥"Logs and output files" next to the <span style="background-color:138a07;color:white"> 🔄 Recompile </span> button can help you locate and debug critical code errors or you can comment-out recent code (**CTRL+'**) and uncomment it gradually. After major debugging, it can be necessary to choose <span style="background-color:138a07;color:white"> 🔄 Recompile </span> &rarr; "Recompile from scratch" to clear the cache memory.
+     * 📄🟥"Logs and output files" next to the <span style="background-color:#138a07;color:white">🔄 Recompile</span> button can help you locate and debug critical code errors or you can comment-out recent code (**CTRL+'**) and uncomment it gradually. After major debugging, it can be necessary to choose <span style="background-color:#138a07;color:white">🔄 Recompile</span> &rarr; "Recompile from scratch" to clear the cache memory.
 
 ### License
 This repository is released under the [MIT License](https://github.com/ThorNoe/Stata_example/blob/main/LICENSE), that is, you can basically do anything with my code as long as you give appropriate credit and don’t hold me liable.

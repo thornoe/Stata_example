@@ -1,7 +1,7 @@
 ********************************************************************************
 * STATA CODE EXAMPLE (OPTIONAL SUPPLEMENT FOR COURSE 2525: APPLIED ECONOMICS)
 * LOAD DATA: Example on how to load data from .csv or .xlsx files
-* FIGURES: Example on how to set up, save, and combine figures
+* FIGURES: Example on how to set up, combine, and export figures
 * TABLES: Example on how to export tables of descriptive statistics or estimates
 * PANEL ANALYSIS: Example on how to analyze panel data (BEYOND EXPECTED SKILLS)
 * LATEX DOCUMENT: Download & compile code from GitHub.com/ThorNoe/Stata_example
@@ -9,7 +9,7 @@
 ********************************************************************************
 /* Installations
 ssc install bcuse 	// access Wooldridge datasets for the examples below
-ssc install estout	// export tables to Excel, Word, and LaTeX
+ssc install estout	// export tables to Excel, Word, or LaTeX
 */
 
 * Change directory to the folder with your data files (redundant for bcuse)

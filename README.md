@@ -31,7 +31,7 @@ Aarhus University [provides access](https://studerende.au.dk/it-support/software
 To handle LaTeX code, I highly recommend using the free [Overleaf](https://www.overleaf.com) editor in your browser:
 1. Download the [.zip file](https://github.com/ThorNoe/article_template/archive/refs/heads/main.zip) of my [LaTeX article template](https://github.com/ThorNoe/article_template) (or the [.zip file](https://github.com/ThorNoe/Stata_example/raw/main/LaTeX.zip) with LaTeX code for the [pdf with outputs](https://github.com/ThorNoe/Stata_example/blob/main/LaTeX/main.pdf) of the above Stata example).
 2. Create an [Overleaf](https://www.overleaf.com/register) account
-   * Select <span style="background-color:green;color:white">New Project</span> &rarr; "Upload Project" &rarr; add the .zip file.
+   * Select <span style="background-color:green;color:white">"New Project"</span> &rarr; "Upload Project" &rarr; add the .zip file.
    * "Share" &rarr; add e-mail addresses of your other group members.
 3. Learn the basics
    * Read the guide [Learn LaTeX in 30 minutes
@@ -40,7 +40,7 @@ To handle LaTeX code, I highly recommend using the free [Overleaf](https://www.o
      * Click on ">" next to the "preample" folder &rarr; open the "title_page.tex" file to edit title and authors.
      * Click on ">" next to the "sections" folder &rarr; open "data.tex" or another file to start writing.
      * **CTRL+s** saves your current file and *recompiles* the entire document. Do it often to catch compiling errors early.
-     * 📄🟥"Logs and output files" next to the <span style="background-color:green;color:white">🔄 Recompile</span> button can help you locate and debug critical code errors or you can out-comment recent code and uncomment it gradually (**CTRL+'** adds/removes `%` at the beginning of each marked line). After major debugging, it can be necessary to choose <span style="background-color:green;color:white">🔄 Recompile</span> &rarr; "Recompile from scratch" to clear the cache memory.
+     * 📄🟥"Logs and output files" next to the <span style="background-color:green;color:white">🔄 "Recompile"</span> button can help you locate and debug critical code errors or you can out-comment recent code and uncomment it gradually (**CTRL+'** adds/removes `%` at the beginning of each marked line). After major debugging, it can be necessary to choose <span style="background-color:green;color:white">🔄 "Recompile"</span> &rarr; "Recompile from scratch" to clear the cache memory.
 
 ### License
 This repository is released under the [MIT License](https://github.com/ThorNoe/Stata_example/blob/main/LICENSE), that is, you can basically do anything with my code as long as you give appropriate credit and don’t hold me liable.

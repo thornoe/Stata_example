@@ -1,10 +1,10 @@
 \documentclass[11pt]{article}
-\input{preample/packages}
-\input{preample/citations}
-\input{preample/hyperlinks}
-\input{preample/notes}
-\input{preample/ref_commands}
-\input{preample/title_page} % edit title & author(s) in title_page.tex
+\input{preamble/packages}
+\input{preamble/citations}
+\input{preamble/hyperlinks}
+\input{preamble/notes}
+\input{preamble/ref_commands}
+\input{preamble/title_page} % edit title & author(s) in title_page.tex
 \addbibresource{bibliography.bib} % add references to bibliography.bib
 
 %---------------------------------------------------------------
@@ -12,12 +12,12 @@
 %---------------------------------------------------------------
 \begin{document}
 \begin{titlingpage}
-    \maketitle
+    \maketitle % using preamble/title_page.tex
     \centering
     \includegraphics[width=.5 \textwidth]{figures/Logo}
     % \begin{abstract}
     % \end{abstract}
-    \vfill % add vertical fill (push contents down to bottom of page)
+    \vfill % adds vertical fill (push contents down to bottom of page)
     \tableofcontents
 \end{titlingpage}
 
@@ -43,7 +43,7 @@
 %---------------------------------------------------------------
 \clearpage
 \appendix
-\setcounter{page}{1}\pagenumbering{roman} % page numbering i, ii, iii, iv...
+\setcounter{page}{1}\pagenumbering{roman} % page numbering i, ii...
 % \renewcommand{\theequation}{\thesection.\arabic{equation}} % add appendix letter to equation numbering
 
 \input{sections/appendix}

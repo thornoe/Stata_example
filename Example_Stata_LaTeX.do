@@ -1,5 +1,5 @@
 ********************************************************************************
-* STATA CODE EXAMPLE (OPTIONAL SUPPLEMENT FOR COURSE 2525: APPLIED ECONOMICS)
+* STATA CODE EXAMPLE (OPTIONAL SUPPLEMENT FOR AU COURSE 2525: APPLIED ECONOMICS)
 * LOAD DATA: Example on how to load data from .csv or .xlsx files
 * FIGURES: Example on how to set up, combine, and export figures
 * TABLES: Example on how to export tables of descriptive statistics or estimates

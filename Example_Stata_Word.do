@@ -6,11 +6,14 @@
 * PANEL ANALYSIS: Example on how to analyze panel data (BEYOND EXPECTED SKILLS)
 * MIT LICENSE: Copyright (c) 2023 Thor Donsby Noe (give credit; no liability)
 ********************************************************************************
-/* Installations
+/* Installations and settings
 ssc install bcuse 		// access Wooldridge datasets for the examples below
 ssc install estout		// export tables to Excel, Word, or LaTeX (descriptive)
 ssc install outreg2		// export tables to Excel, Word (estimation results)
 ssc install extremes	// list extreme observations for a variable
+set scheme s1color, permanently	// printer-friendly plain look for figures
+set scheme s2color, permanently // default color scheme with light blue frame
+help scheme 					// for more for color scheme options
 */
 
 * Change directory to the folder with your data files (redundant for bcuse)
@@ -131,7 +134,7 @@ tab scrap if d88==0 & d89==0 & grant_lead==0 & grant_lead2==0 // five<.28; three
 gr two	(kdensity scrap if d88==1 & grant==1) ///
 		(kdensity scrap if d88==1 & grant==0 & grant_lead==0) ///
 		, legend(label(1 "Grant in 1988") label(2 "No grant")) ///
-		title("Panel A: Scrap rates in 1988") ///
+		title("Panel B: Scrap rates in 1988") ///
 		xtitle("Scrap rate (per 100 items)") ytitle("Density") ///
 		xlab(0(5)30) ylab(0(.05).25) /// fix axis scales to match Fig_89
 		name(Fig_88, replace) // name for graph combine below
@@ -169,7 +172,7 @@ reg lscrap grant grant_1 trend // grant is insignificant
 outreg2 using "$tables/results.doc", /// append to existing Word table
 	ctitle("Trend, (se)") label nocons
 
-* Take a look at the standard errors (detect outliers)
+* Take a look at the standard errors (detect heterogeneity/outliers)
 predict uhat, residuals // save predicted error term of the last regression
 extremes uhat fcode year scrap, n(10) // unobserved firm-specific effects (permanent differences)
 drop uhat // remove the uhat variable such that it can be predicted again

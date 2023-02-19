@@ -193,14 +193,3 @@ outreg2 using "$tables/results.doc", ///
 xtreg lscrap grant grant_1 d88 d89, fe cluster(fcode) // lag is insignificant
 outreg2 using "$tables/results.doc", /// see appendix 14A.2 in Wooldridge 7e, pp. 493-494
 	ctitle("FE cluster robust, (se)") label nocons
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	

@@ -13,7 +13,7 @@ ssc install outreg2		// export tables to Excel, Word (estimation results)
 ssc install extremes	// list extreme observations for a variable
 set scheme s1color, permanently	// printer-friendly plain look for figures
 set scheme s2color, permanently // default color scheme with light blue frame
-help scheme 					// for more for color scheme options
+help schemes 					// for more for color scheme options
 */
 
 * Change directory to the folder with your data files (redundant for bcuse)
@@ -125,10 +125,10 @@ gr two	(kdensity scrap if d88==0 & d89==0 & grant_lead==1) ///
 		xlab(0(5)30) ylab(0(.05).25) /// fix axis scales to match Fig_89
 		name(Fig_87, replace) // name for graph combine below
 graph export "$figures/kernels_87.png", replace
-sum scrap if d88==0 & d89==0 & grant_lead==1, detail // smallest=.28, p10=.45
-sum scrap if d88==0 & d89==0 & grant_lead==0 & grant_lead2==0, detail // p10=.06
+sum scrap if d88==0 & d89==0 & grant_lead==1, detail // smallest=.28, largest=18
+sum scrap if d88==0 & d89==0 & grant_lead==0 & grant_lead2==0, detail // same median
 tab scrap if d88==0 & d89==0 & grant_lead==0 & grant_lead2==0 // five<.28; three>18
-* Selection bias? No firm getting grant in 1988 scrapped less than 0.28% in 1987
+* Selection bias? No firm getting grant in 1988 had close to 0 or very high scrap rate
 
 * Figure: Kernel density in 1988 (by grant in 1988)
 gr two	(kdensity scrap if d88==1 & grant==1) ///
@@ -168,16 +168,17 @@ outreg2 using "$tables/results.doc", replace /// create/overwrite Word document
 	ctitle("Baseline, (se)") label nocons // use variable labels and omit constant
 
 * Baseline simplified with a yearly time trend instead of year dummies
-reg lscrap grant grant_1 trend // grant is insignificant
+reg lscrap grant grant_1 trend // estimates, se, and R^2 unchanged
 outreg2 using "$tables/results.doc", /// append to existing Word table
 	ctitle("Trend, (se)") label nocons
 
-* Take a look at the standard errors (detect heterogeneity/outliers)
+* Take a look at the standard errors (does Gauss-Markov Assumptions hold?)
 predict uhat, residuals // save predicted error term of the last regression
-extremes uhat fcode year scrap, n(10) // unobserved firm-specific effects (permanent differences)
+extremes uhat fcode year scrap, n(10) // violates MLR.2 (random sampling: obs are i.i.d.)
+bysort year: sum uhat // violates MLR.4 (0 conditional mean) & MLR.5 (homoscedasticity)
 drop uhat // remove the uhat variable such that it can be predicted again
 
-* Baseline extended with dummies to capture firm-specific effects
+* Baseline extended with dummies to capture firm-specific effects (permanent differences)
 reg lscrap grant grant_1 d88 d89 i.fcode // identical to FE estimation but for constant and dummies
 outreg2 using "$tables/results.doc", ///
 	drop(i.fcode) addtext(Firm dummies, Yes) /// omit firm dummies but note it
@@ -185,10 +186,21 @@ outreg2 using "$tables/results.doc", ///
 
 * FE estimation: time-demeaning eliminates firm-specific effect (within-transformation)
 xtreg lscrap grant grant_1 d88 d89, fe // identical to table 14.1 in Wooldridge 7e, p. 464
-outreg2 using "$tables/results.doc", 
+outreg2 using "$tables/results.doc", ///
 	ctitle("FE, (se)") label nocons
 
 * FE estimation with cluster-robust std. errors (obs for same firm aren't i.i.d.)
 xtreg lscrap grant grant_1 d88 d89, fe cluster(fcode) // lag is insignificant
 outreg2 using "$tables/results.doc", /// see appendix 14A.2 in Wooldridge 7e, pp. 493-494
 	ctitle("FE cluster robust, (se)") label nocons
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

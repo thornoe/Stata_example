@@ -13,7 +13,7 @@ ssc install estout		// export tables to Excel, Word, or LaTeX
 ssc install extremes	// list extreme observations for a variable
 set scheme s1color, permanently	// printer-friendly plain look for figures
 set scheme s2color, permanently // default color scheme with light blue frame
-help scheme 					// for more for color scheme options
+help schemed 					// for more for color scheme options
 */
 
 * Change directory to the folder with your data files (redundant for bcuse)
@@ -125,10 +125,10 @@ gr two	(kdensity scrap if d88==0 & d89==0 & grant_lead==1) ///
 		xlab(0(5)30) ylab(0(.05).25) /// fix axis scales to match Fig_89
 		name(Fig_87, replace) // name for graph combine below
 graph export "$figures/kernels_87.png", replace
-sum scrap if d88==0 & d89==0 & grant_lead==1, detail // smallest=.28, p10=.45
-sum scrap if d88==0 & d89==0 & grant_lead==0 & grant_lead2==0, detail // p10=.06
+sum scrap if d88==0 & d89==0 & grant_lead==1, detail // smallest=.28, largest=18
+sum scrap if d88==0 & d89==0 & grant_lead==0 & grant_lead2==0, detail // same median
 tab scrap if d88==0 & d89==0 & grant_lead==0 & grant_lead2==0 // five<.28; three>18
-* Selection bias? No firm getting grant in 1988 scrapped less than 0.28% in 1987
+* Selection bias? No firm getting grant in 1988 had close to 0 or very high scrap rate
 
 * Figure: Kernel density in 1988 (by grant in 1988)
 gr two	(kdensity scrap if d88==1 & grant==1) ///
@@ -168,12 +168,13 @@ reg lscrap grant grant_1 d88 d89 // grant is insignificant
 est store baseline, title("Baseline")
 
 * Baseline simplified with a yearly time trend instead of year dummies
-reg lscrap grant grant_1 trend // grant is insignificant
+reg lscrap grant grant_1 trend // estimates, se, and R^2 are roughly unchanged
 est store trend, title("Trend")
 
-* Take a look at the standard errors (detect heterogeneity/outliers)
+* Take a look at the standard errors (does Gauss-Markov Assumptions hold?)
 predict uhat, residuals // save predicted error term of the last regression
-extremes uhat fcode year scrap, n(10) // unobserved firm-specific effects (permanent differences)
+extremes uhat fcode year scrap, n(10) // violates MLR.2 (random sampling: obs are i.i.d.)
+bysort year: sum uhat // violates MLR.4 (0 conditional mean) & MLR.5 (homoscedasticity)
 drop uhat // remove the uhat variable such that it can be predicted again
 
 * Baseline extended with dummies to capture firm-specific effects
@@ -199,7 +200,7 @@ estout * using "$tables/results.tex", replace style(tex) /// create/overwrite La
 	starlevels(* .10 ** .05 *** .01) mlabels(,titles numbers) label ///
 	cells( b(star fmt(4)) se(par fmt(4)) ) ///
 	stats( r2 N N_g g_avg, fmt(%12.4gc) labels("R$^2$" "Obs." "Number of firms" "Obs. per firm") ) ///
-	drop(_cons) indicate("Firm dummies=*fcode*") /// omit constant and firm dummies
+	drop(_cons) indicate("Firm dummies=fcode*") /// omit constant and firm dummies
 	prehead("\begin{tabular}{lccccc}\hline") /// MANUALLY FIT NUMBER OF C's TO NUMBER OF MODELS!
 	posthead("\hline") prefoot("\hline") ///
 	postfoot("\hline\end{tabular}\\Standard errors in parentheses. *** p<0.01, ** p<0.05, * p<0.1")

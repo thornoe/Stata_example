@@ -14,6 +14,8 @@ Namely, I provide the same example in two separate do-files depending on your pr
 * [Stata example using Word](https://github.com/ThorNoe/Stata_example/blob/main/Example_Stata_Word.do)
 * [Stata example using LaTeX](https://github.com/ThorNoe/Stata_example/blob/main/Example_Stata_LaTeX.do) (and [pdf with outputs](https://github.com/ThorNoe/Stata_example/blob/main/LaTeX/main.pdf) compiled using the code in the [LaTeX folder](https://github.com/ThorNoe/Stata_example/tree/main/LaTeX))
 
+In Danish, I explain the code in four [videos](https://panopto.au.dk/Panopto/Pages/Viewer.aspx?pid=16d10c85-77e2-4e52-822b-afae00080e9a) with time codes.
+
 ## Panel analysis
 Example on how to analyze panel data.
 

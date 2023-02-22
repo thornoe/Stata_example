@@ -12,10 +12,10 @@
 \ql \cell\qc (0.338)\cell\qc (0.325)\cell\qc (0.151)\cell\qc (0.151)\cell\qc (0.143)\cell\row
 \ql Grant lagged\cell\qc 0.0489\cell\qc 0.0459\cell\qc -0.422**\cell\qc -0.422**\cell\qc -0.422\cell\row
 \ql \cell\qc (0.436)\cell\qc (0.425)\cell\qc (0.210)\cell\qc (0.210)\cell\qc (0.282)\cell\row
-\ql Year 1988\cell\qc -0.239\cell\qc \cell\qc -0.0802\cell\qc -0.0802\cell\qc -0.0802\cell\row
-\ql \cell\qc (0.311)\cell\qc \cell\qc (0.109)\cell\qc (0.109)\cell\qc (0.0978)\cell\row
 \ql Year 1989\cell\qc -0.497\cell\qc \cell\qc -0.247*\cell\qc -0.247*\cell\qc -0.247\cell\row
 \ql \cell\qc (0.338)\cell\qc \cell\qc (0.133)\cell\qc (0.133)\cell\qc (0.197)\cell\row
+\ql Year 1988\cell\qc -0.239\cell\qc \cell\qc -0.0802\cell\qc -0.0802\cell\qc -0.0802\cell\row
+\ql \cell\qc (0.311)\cell\qc \cell\qc (0.109)\cell\qc (0.109)\cell\qc (0.0978)\cell\row
 \ql Time trend\cell\qc \cell\qc -0.248\cell\qc \cell\qc \cell\qc \cell\row
 \ql \cell\qc \cell\qc (0.168)\cell\qc \cell\qc \cell\qc \cell\row
 \ql \cell\qc \cell\qc \cell\qc \cell\qc \cell\qc \cell\row

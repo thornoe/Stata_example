@@ -163,8 +163,8 @@ graph export "$figures/kernels_combined.png", replace
 ********************************************************************************
 estimates clear // clear estimates before creating table of estimation results
 
-* Baseline (standard pooled OLS with year dummies)
-reg lscrap grant grant_1 d88 d89 // grant is insignificant
+* Baseline (standard pooled OLS with year dummies d88 and d89)
+reg lscrap grant grant_1 d8* // grant is insignificant
 est store baseline, title("Baseline")
 
 * Baseline simplified with a yearly time trend instead of year dummies
@@ -178,15 +178,15 @@ bysort year: sum uhat // violates MLR.4 (0 conditional mean) & MLR.5 (homoscedas
 drop uhat // remove the uhat variable such that it can be predicted again
 
 * Baseline extended with dummies to capture firm-specific effects
-reg lscrap grant grant_1 d88 d89 i.fcode // identical to FE estimation but for constant and dummies
+reg lscrap grant grant_1 d8* i.fcode // identical to FE estimation but for constant and dummies
 est store dummies, title("Dummies")
 
 * FE estimation: time-demeaning eliminates firm-specific effect (within-transformation)
-xtreg lscrap grant grant_1 d88 d89, fe // identical to table 14.1 in Wooldridge 7e, p. 464
+xtreg lscrap grant grant_1 d8*, fe // identical to table 14.1 in Wooldridge 7e, p. 464
 est store FE, title("FE")
 
 * FE estimation with cluster-robust std. errors (obs for same firm aren't i.i.d.)
-xtreg lscrap grant grant_1 d88 d89, fe cluster(fcode) // lag is insignificant
+xtreg lscrap grant grant_1 d8*, fe cluster(fcode) // lag is insignificant
 est store FE_cluster, title("FE cluster robust") // see appendix 14A.2 in Wooldridge 7e, pp. 493-494
 
 * Save complete estimation results as Excel file
@@ -200,7 +200,7 @@ estout * using "$tables/results.tex", replace style(tex) /// create/overwrite La
 	starlevels(* .10 ** .05 *** .01) mlabels(,titles numbers) label ///
 	cells( b(star fmt(4)) se(par fmt(4)) ) ///
 	stats( r2 N N_g g_avg, fmt(%12.4gc) labels("R$^2$" "Obs." "Number of firms" "Obs. per firm") ) ///
-	drop(_cons) indicate("Firm dummies=fcode*") /// omit constant and firm dummies
+	drop(_cons) indicate("Firm dummies=*fcode") /// omit constant and firm dummies
 	prehead("\begin{tabular}{lccccc}\hline") /// MANUALLY FIT NUMBER OF C's TO NUMBER OF MODELS!
 	posthead("\hline") prefoot("\hline") ///
 	postfoot("\hline\end{tabular}\\Standard errors in parentheses. *** p<0.01, ** p<0.05, * p<0.1")

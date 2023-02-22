@@ -162,8 +162,8 @@ graph export "$figures/kernels_combined.png", replace
 * ESTIMATION (panel analysis elaborates on Table 14.1 in Wooldridge 7e, p. 464)
 * Replace ".doc" with ".xls" to produce an Excel workbook with results instead
 ********************************************************************************
-* Baseline (standard pooled OLS with year dummies)
-reg lscrap grant grant_1 d88 d89 // grant is insignificant
+* Baseline (standard pooled OLS with year dummies d88 and d89)
+reg lscrap grant grant_1 d8* // grant is insignificant
 outreg2 using "$tables/results.doc", replace /// create/overwrite Word document
 	ctitle("Baseline, (se)") label nocons // use variable labels and omit constant
 
@@ -179,17 +179,17 @@ bysort year: sum uhat // violates MLR.4 (0 conditional mean) & MLR.5 (homoscedas
 drop uhat // remove the uhat variable such that it can be predicted again
 
 * Baseline extended with dummies to capture firm-specific effects (permanent differences)
-reg lscrap grant grant_1 d88 d89 i.fcode // identical to FE estimation but for constant and dummies
+reg lscrap grant grant_1 d8* i.fcode // identical to FE estimation but for constant and dummies
 outreg2 using "$tables/results.doc", ///
 	drop(i.fcode) addtext(Firm dummies, Yes) /// omit firm dummies but note it
 	ctitle("Dummies, (se)") label nocons
 
 * FE estimation: time-demeaning eliminates firm-specific effect (within-transformation)
-xtreg lscrap grant grant_1 d88 d89, fe // identical to table 14.1 in Wooldridge 7e, p. 464
+xtreg lscrap grant grant_1 d8*, fe // identical to table 14.1 in Wooldridge 7e, p. 464
 outreg2 using "$tables/results.doc", ///
 	ctitle("FE, (se)") label nocons
 
 * FE estimation with cluster-robust std. errors (obs for same firm aren't i.i.d.)
-xtreg lscrap grant grant_1 d88 d89, fe cluster(fcode) // lag is insignificant
+xtreg lscrap grant grant_1 d8*, fe cluster(fcode) // lag is insignificant
 outreg2 using "$tables/results.doc", /// see appendix 14A.2 in Wooldridge 7e, pp. 493-494
 	ctitle("FE cluster robust, (se)") label nocons

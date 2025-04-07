@@ -27,7 +27,7 @@ Aarhus University [provides access](https://studerende.au.dk/it-support/software
 * At [Office Online](https://www.office.com/), you can open a new Word document or one existing on your OneDrive.
   * "Share" access to the document with other AU e-mails or copy a link to it (loosen restriction such that anyone on AU with the link can edit).
   * You can write within you browser or even do real-time editing in your desktop version of Microsoft Word (select "Redigering" &rarr; "Åbn i skrivebordsprogram").
-* At [OneDrive.live.com](https://onedrive.live.com/), you can share a folder with the rest of your group to ease access to the Word document and other files.
+* At [OneDrive.live.com/login](https://onedrive.live.com/login), you can share a folder with the rest of your group to ease access to the Word document and other files.
 
 ## Use LaTeX in real-time
 To handle LaTeX code, I highly recommend using the free [Overleaf](https://www.overleaf.com) editor in your browser:
